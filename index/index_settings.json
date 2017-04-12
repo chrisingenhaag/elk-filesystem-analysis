@@ -1,0 +1,23 @@
+{
+    "mappings": {
+        "fsanalyzer" : {
+            "properties" : {
+                "name" : {
+                    "type" : "string"
+                },
+                "fullpath" : {
+                    "type": "string"
+                },
+                "filesize" : {
+                    "type": "long"
+                },
+                "suffix" : {
+                    "type": "string"
+                },
+                "ctime" : {
+                    "type": "date"
+                }
+            }
+        }
+    }
+}

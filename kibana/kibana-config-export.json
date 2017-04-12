@@ -1,0 +1,116 @@
+[
+  {
+    "_id": "27f60720-16bb-11e7-b853-abe0b3f6685c",
+    "_type": "dashboard",
+    "_source": {
+      "title": "Filesystem analysis",
+      "hits": 0,
+      "description": "",
+      "panelsJSON": "[{\"col\":1,\"id\":\"2bb41600-16ba-11e7-b853-abe0b3f6685c\",\"panelIndex\":1,\"row\":1,\"size_x\":6,\"size_y\":3,\"type\":\"visualization\"},{\"col\":7,\"id\":\"dbf71260-16ba-11e7-b853-abe0b3f6685c\",\"panelIndex\":2,\"row\":1,\"size_x\":6,\"size_y\":3,\"type\":\"visualization\"},{\"col\":1,\"id\":\"3533cf20-16bc-11e7-b853-abe0b3f6685c\",\"panelIndex\":3,\"row\":4,\"size_x\":12,\"size_y\":4,\"type\":\"visualization\"},{\"col\":1,\"id\":\"d7757ab0-16e2-11e7-a917-07746e887c4b\",\"panelIndex\":4,\"row\":8,\"size_x\":6,\"size_y\":3,\"type\":\"visualization\"}]",
+      "optionsJSON": "{\"darkTheme\":false}",
+      "uiStateJSON": "{}",
+      "version": 1,
+      "timeRestore": false,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[{\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}}}]}"
+      }
+    }
+  },
+  {
+    "_id": "788cbe60-16b9-11e7-b853-abe0b3f6685c",
+    "_type": "search",
+    "_source": {
+      "title": "filetypes",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "name",
+        "fullpath",
+        "ctime",
+        "suffix",
+        "filesize"
+      ],
+      "sort": [
+        "_score",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"fsanalyze\",\"highlightAll\":true,\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "d7757ab0-16e2-11e7-a917-07746e887c4b",
+    "_type": "visualization",
+    "_source": {
+      "title": "disk usage over time",
+      "visState": "{\"type\":\"timelion\",\"title\":\"disk usage over time\",\"params\":{\"expression\":\".es(metric=sum:filesize, timefield=ctime, kibana=true).cusum(0).divide(1000000).label(\\\"disk usage in MB\\\")\",\"interval\":\"1M\"}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{}"
+      }
+    }
+  },
+  {
+    "_id": "dbe85d90-1ed7-11e7-82d7-d3878dcd3749",
+    "_type": "visualization",
+    "_source": {
+      "title": "new files over time",
+      "visState": "{\"title\":\"new files over time\",\"type\":\"timelion\",\"params\":{\"expression\":\".es(metric=count:filesize, timefield=ctime, kibana=true).cusum(0).label(\\\"files count over time\\\")\",\"interval\":\"auto\"},\"aggs\":[],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "3533cf20-16bc-11e7-b853-abe0b3f6685c",
+    "_type": "visualization",
+    "_source": {
+      "title": "overtime added files",
+      "visState": "{\"title\":\"overtime added files\",\"type\":\"histogram\",\"params\":{\"addTooltip\":true,\"addLegend\":true,\"legendPosition\":\"right\",\"scale\":\"linear\",\"mode\":\"stacked\",\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":false,\"setYExtents\":false},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"sum\",\"schema\":\"metric\",\"params\":{\"field\":\"filesize\",\"customLabel\":\"size of added files\"}},{\"id\":\"2\",\"enabled\":true,\"type\":\"date_histogram\",\"schema\":\"segment\",\"params\":{\"field\":\"ctime\",\"interval\":\"M\",\"customInterval\":\"2h\",\"min_doc_count\":1,\"extended_bounds\":{}}},{\"id\":\"3\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"group\",\"params\":{\"field\":\"suffix.keyword\",\"size\":15,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "savedSearchId": "788cbe60-16b9-11e7-b853-abe0b3f6685c",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "2bb41600-16ba-11e7-b853-abe0b3f6685c",
+    "_type": "visualization",
+    "_source": {
+      "title": "file type dsitribution",
+      "visState": "{\"title\":\"file type dsitribution\",\"type\":\"pie\",\"params\":{\"addTooltip\":true,\"addLegend\":true,\"legendPosition\":\"right\",\"isDonut\":true},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"suffix.keyword\",\"size\":37,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "savedSearchId": "788cbe60-16b9-11e7-b853-abe0b3f6685c",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "dbf71260-16ba-11e7-b853-abe0b3f6685c",
+    "_type": "visualization",
+    "_source": {
+      "title": "used space per file type",
+      "visState": "{\"title\":\"used space per file type\",\"type\":\"pie\",\"params\":{\"addTooltip\":true,\"addLegend\":true,\"legendPosition\":\"right\",\"isDonut\":false},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"sum\",\"schema\":\"metric\",\"params\":{\"field\":\"filesize\"}},{\"id\":\"2\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"suffix.keyword\",\"size\":15,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "savedSearchId": "788cbe60-16b9-11e7-b853-abe0b3f6685c",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[]}"
+      }
+    }
+  }
+]
